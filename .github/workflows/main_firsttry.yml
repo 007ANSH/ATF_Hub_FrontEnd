@@ -10,8 +10,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # Required for OIDC, can also be used with service principal
-      contents: read  # Required for actions/checkout
+      id-token: write  # Required for OIDC
+      contents: read   # Required for actions/checkout
 
     steps:
       # Step 1: Checkout Code
@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22' # Replace with your Node.js version (e.g., 18, 20)
+          node-version: '22'
 
       # Step 3: Install Dependencies and Build
       - name: Install dependencies and build
@@ -36,12 +36,12 @@ jobs:
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_CLIENT_SECRET }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # Step 5: Deploy to Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'Your-App-Service-Name' # Replace with your Azure App Service name
+          app-name: 'Your-App-Service-Name' # Replace with your App Service name
           slot-name: 'production'          # Replace with your deployment slot if not 'production'
           package: './dist'                # Replace './dist' with your build output folder
