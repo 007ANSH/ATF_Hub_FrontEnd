@@ -3,12 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "cp web.config dist/web.config",
     "lint": "eslint .",
     "preview": "vite preview"
-  },
+  }
+  ,
+
   "dependencies": {
     "@azure/msal-browser": "^4.13.0",
     "@azure/msal-react": "^3.0.12",
